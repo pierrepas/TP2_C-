@@ -4,19 +4,6 @@
 using namespace std;
 int main( int argc, char** argv )
 {
-<<<<<<< HEAD
-  typedef unsigned char GrayLevel;
-  typedef Image2D<GrayLevel> GrayLevelImage2D;
-  GrayLevelImage2D img( 8, 8, 5 ); // imagette 8x8 remplie de 5
-  for ( int y = 0; y < img.h(); ++y )
-    {
-      for ( int x = 0; x < img.w(); ++x )
-        std::cout << " " << (int) img.at( x, y ); // la conversion permet de voir les caractères sous forme d'entiers.
-      std::cout << std::endl;
-    }
-  return 0;
-}
-=======
 	typedef unsigned char GrayLevel;
 	typedef Image2D<GrayLevel> GrayLevelImage2D;
 	GrayLevelImage2D img( 8, 8, 5 ); // imagette 8x8 remplie de 5
@@ -28,5 +15,3 @@ int main( int argc, char** argv )
 	}
 	return 0;
 }
-
->>>>>>> 1bfeb5028c6b87cebb5dbbc05b4f84d361609214
