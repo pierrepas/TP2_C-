@@ -1,4 +1,3 @@
-// file Image2D.hpp
 #ifndef _IMAGE2D_HPP_
 #define _IMAGE2D_HPP_
 #include <vector>
