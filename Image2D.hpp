@@ -49,6 +49,20 @@ class Image2D {
 			return m_data[ index( i, j ) ];
 		}
 
+		struct Iterator : public Container::iterator {
+  			Iterator( Self & image, int x, int y ) 
+    			: Container::iterator( image.m_data.begin() + image.index( x, y ) )
+  			{}
+		};
+
+		/// @return un itérateur pointant sur le début de l'image
+		Iterator begin() { return start( 0, 0 ); }
+		/// @return un itérateur pointant après la fin de l'image
+		Iterator end()   { return start( 0, h() ); }
+		/// @return un itérateur pointant sur le pixel (x,y).
+		Iterator start( int x, int y ) { return Iterator( *this, x, y ); }
+
+
 	private:
 		Container m_data; // mes données; évitera de faire les allocations dynamiques
 		int m_width; // ma largeur
