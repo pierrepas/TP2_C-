@@ -35,8 +35,8 @@ class Image2DWriter<unsigned char> {
             output << std::endl << img.h() << " " << img.w() << std::endl;
             output << 255 << std::endl;
 
-            for ( int i = 0; i < img.w(); i++){
-                for (int j = 0; j < img.h(); j++){
+            for ( int i = 0; i < img.h(); i++){
+                for (int j = 0; j < img.w(); j++){
                     if (ascii){
 
                         output << (int) img.at(i, j);
@@ -65,7 +65,7 @@ class Image2DWriter<Color> {
             else {
                 output << "P6";
             }
-            output << std::endl << img.h() << " " << img.w() << std::endl;
+            output << std::endl << img.w() << " " << img.h() << std::endl;
             output << 255 << std::endl;
 
             if (!ascii){

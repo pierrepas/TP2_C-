@@ -33,7 +33,7 @@ class Image2DReader<unsigned char>{
             if(s[1] == '5'){
                 char lect;
                 input >> std::noskipws;
-                for (int i=0; i < img.w(); i++){
+                for (int i=0; i < img.h(); i++){
                     for (int j=0; j < img.w(); j++){
                         input >> lect;
                         img.at(i,j) = lect;
@@ -41,7 +41,7 @@ class Image2DReader<unsigned char>{
                 }
             }else{
                 int lect;
-                for (int i=0; i < img.w(); i++){
+                for (int i=0; i < img.h(); i++){
                     for (int j=0; j < img.w(); j++){
                         input >> lect;
                         img.at(i,j) = lect;
@@ -72,20 +72,19 @@ class Image2DReader<Color> {
             Image img = Image(w , h);
             if(s[1] == '6'){
                 input >> std::noskipws;
-                for (int i=0; i < img.w(); i++){
-                    for (int j=0; j < img.w(); j++){
-                        input >> img.at(j,i).red;
-                        input >> img.at(j,i).green;
-                        input >> img.at(j,i).blue;
-                    }
+                unsigned char r, g, b;
+                for(Image::Iterator i = img.begin(), j = img.end();
+                        i != j; i++){
+                    input >> r >> g >> b;
+                    *i = Color(r, g, b);
                 }
             }else{
-                for (int i=0; i < img.w(); i++){
-                    for (int j=0; j < img.w(); j++){
-                        input >> img.at(j,i).red;
-                        input >> img.at(j,i).green;
-                        input >> img.at(j,i).blue;
-                    }
+                input >> std::noskipws;
+                int r, g, b;
+                for(Image::Iterator i = img.begin(), j = img.end();
+                        i != j; i++){
+                    input >> r >> g >> b;
+                    *i = Color(r, g, b);
                 }
             }
             return img;
