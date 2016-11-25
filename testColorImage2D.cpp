@@ -3,6 +3,7 @@
 #include "Image2D.hpp"
 #include "Color.hpp"
 #include "Image2DWriter.hpp"
+#include "Image2DReader.hpp"
 int main()
 {
     typedef Image2D<Color> ColorImage2D;
@@ -38,5 +39,16 @@ int main()
         return 1;
     }
     output.close();
+
+    std::ifstream input("colors.ppm");
+    ColorImage2D imgRD2 = Image2DReader<Color>::read(input);
+    std::ofstream output_2("colors_2.ppm");
+    bool ok3 = Image2DWriter<Color>::write( imgRD2, output_2, false );
+    if ( !ok3 ) {
+        std::cerr << "Error writing output file." << std::endl;
+        return 1;
+    }
+    output_2.close();
+
 }
 
