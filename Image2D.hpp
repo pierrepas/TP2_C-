@@ -2,12 +2,39 @@
 #define _IMAGE2D_HPP_
 #include <vector>
 /// Classe générique pour représenter des images 2D.
+//
 template <typename TValue>
 class Image2D {
     public:
         typedef Image2D<TValue>    Self;      // le type de *this
         typedef TValue             Value;     // le type pour la valeur des pixels
         typedef std::vector<Value> Container; // le type pour stocker les valeurs des pixels de l'image.
+        template <typename TAccessor>
+            struct GenericConstIterator : public Container::const_iterator {
+                typedef TAccessor Accessor;
+                typedef typename Accessor::Argument  ImageValue;
+                typedef typename Accessor::Value     Value;
+                typedef typename Accessor::Reference Reference;
+
+                GenericConstIterator( const Image2D<ImageValue>& image, int x, int y )
+                    : Container::iterator(image.m_data.begin() + image.index(x,y))
+                {}
+
+                Value operator*() const
+                { return Accessor::access( Container::const_iterator::operator*() ); }
+            };
+
+        template <typename Accessor>
+            GenericConstIterator< Accessor > start( int x = 0, int y = 0  ) const
+            { return GenericConstIterator< Accessor >( *this, x, y  );  }
+
+        template <typename Accessor>
+            GenericConstIterator< Accessor > begin() const
+            { return GenericConstIterator< Accessor >( *this, 0, 0  );  }
+
+        template <typename Accessor>
+            GenericConstIterator< Accessor > end() const
+            { return GenericConstIterator< Accessor >( *this, 0, h()  );  }
         // Constructeur par défaut
         Image2D();
         // Constructeur avec taille w x h. Remplit tout avec la valeur g
@@ -18,7 +45,6 @@ class Image2D {
             m_data.resize(w*h);
             fill(g);
         }
-
         // Remplit l'image avec la valeur \a g.
         void fill( TValue g ){
             for ( int i = 0; i < w(); i++ ){
@@ -88,4 +114,5 @@ class Image2D {
             return i + w() * j;
         }
 };
+
 #endif // _IMAGE2D_HPP_
