@@ -30,13 +30,14 @@ struct Color {
     /// @return l'intensité maximale des canaux
     float max() const { return std::max( std::max( r(), g() ), b() ); }
     /// @return l'intensité minimale des canaux
-    float min() const { return std::min( std::min( r(), g() ), b() ); }
-    /**
-      Convertit la couleur RGB en le modèle HSV (TSV en français).
-      @param h la teinte de la couleur (entre 0 et 359), hue en anglais.
-      @param s la saturation de la couleur (entre 0.0 et 1.0)
-      @param v la valeur ou brillance de la couleur (entre 0.0 et 1.0).
-      */
+    float min() const { return std::min( std::min( r(), g() ), b() ); } 
+    
+    void setRGB(int r, int g, int b){
+        red = r;
+        green = g;
+        blue = b;
+    }
+
     void getHSV( int & h, float & s, float & v ) const
     {
         // Taking care of hue
@@ -59,8 +60,36 @@ struct Color {
     /**
 TODO: Convertit la couleur donnée avec le modèle HSV (TSV en
 français) en une couleur RGB.
+
+DONE!
 */
     void setHSV( int h, float s, float v )
-    {}
+    {
+        int hue = (h/60)%6;
+        double value = ((double)hue / 60.0) - hue;
+        double l = v * 1.0 - s;
+        double m = v * (1.0 - value * s);
+        double n = v * (1.0 - (1.0 - value) * s);
+        switch (hue){
+        case 0:
+            setRGB(v, n, l);
+            break;
+        case 1:
+            setRGB(m, v, l);
+            break;
+        case 2:
+            setRGB(l, v, n);
+            break;
+        case 3:
+            setRGB(l, m, v);
+            break;
+        case 4:
+            setRGB(n, l, v);
+            break;
+        case 5:
+            setRGB(v, l, m);
+            break;
+        } 
+    }
 };
 #endif //_COLOR_HPP_

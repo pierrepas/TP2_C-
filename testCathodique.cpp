@@ -24,10 +24,10 @@ int main( int argc, char** argv )
         std::cerr << "Error reading input file." << std::endl;
         return 1;
     }
-      input.close();
-  typedef Image2D<unsigned char> GrayLevelImage2D;
-  typedef Image2DWriter<Color> GrayLevelImage2DWriter;
-  typedef GrayLevelImage2D::Iterator GrayLevelIterator;
+    input.close();
+    typedef Image2D<unsigned char> GrayLevelImage2D;
+    typedef Image2DWriter<Color> GrayLevelImage2DWriter;
+    typedef GrayLevelImage2D::Iterator GrayLevelIterator;
     typedef ColorImage2D::GenericIterator< ColorRedAccessor >   ColorRedConstIterator;
     typedef ColorImage2D::GenericIterator< ColorGreenAccessor > ColorGreenConstIterator;
     typedef ColorImage2D::GenericIterator< ColorBlueAccessor >  ColorBlueConstIterator;

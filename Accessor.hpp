@@ -129,27 +129,27 @@ struct ColorValueAccessor {
         }
         // Accesseur rvalue (lecture)
         // permet d'écrire *it pour récupérer l'intensité du vert
-        operator Value() const 
+        operator Value() const
         {
             int h;
             float s, v;
             arg.getHSV(h,s, v);
-            return (v * 255.0); 
+            return (v * 255.0);
         }
     };
     typedef ColorValueReference Reference;
     // Acces en lecture.
 
-    static Value access( const Argument & arg ) 
-    { 
+    static Value access( const Argument & arg )
+    {
         int h;
         float s, v;
         arg.getHSV(h,s, v);
-        return (v * 255.0); 
+        return (v * 255.0);
     }
-    static Reference access( Argument & arg ) 
+    static Reference access( Argument & arg )
     { return ColorValueReference( arg ); }
-        // Acces en écriture.
+    // Acces en écriture.
 
 };
 
