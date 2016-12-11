@@ -13,7 +13,8 @@ int main(int argc, char* argv[] )
 
 
     std::ifstream input(argv[1]);
-    ColorImage2D img = Image2DReader<Color>::read(input);
+    ColorImage2D img;
+    Image2DReader<Color>::read(img, input);
     Iterator it = img.begin();
 
     for (ColorImage2D::Iterator it=img.begin(),

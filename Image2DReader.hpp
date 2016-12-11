@@ -59,7 +59,7 @@ class Image2DReader<Color> {
     public:
         typedef Color Value;
         typedef Image2D<Value> Image;
-        static Image read( std::istream & input )
+        static bool read(Image & img, std::istream & input )
         {
             std::string s;
             std::string buf;
@@ -69,7 +69,7 @@ class Image2DReader<Color> {
             input >> h;
             input >> cmax;
             std::getline(input, buf);
-            Image img = Image(w , h);
+            img = Image(w , h);
             if(s[1] == '6'){
                 input >> std::noskipws;
                 unsigned char r, g, b;
@@ -87,7 +87,7 @@ class Image2DReader<Color> {
                     *i = Color(r, g, b);
                 }
             }
-            return img;
+            return true;
         }
 };
 #endif // _IMAGE2DREADER_HPP_

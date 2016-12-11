@@ -41,7 +41,8 @@ int main()
     output.close();
 
     std::ifstream input("colors.ppm");
-    ColorImage2D imgRD2 = Image2DReader<Color>::read(input);
+    ColorImage2D imgRD2; 
+    Image2DReader<Color>::read(imgRD2,input);
     std::ofstream output_2("colors_2.ppm");
     bool ok3 = Image2DWriter<Color>::write( imgRD2, output_2, false );
     if ( !ok3 ) {
